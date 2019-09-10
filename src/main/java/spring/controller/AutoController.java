@@ -12,6 +12,7 @@ import spring.model.AutoEntity;
 import spring.model.OrdersEntity;
 
 import javax.xml.bind.ValidationException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -95,10 +96,12 @@ public class AutoController {
             } else {
                 auto.setInStock(true);
                 _autoDao.update(auto);
+                Date currentDate = new Date();
                 List<OrdersEntity> orders = _orderDao.findByAutoId(auto.getId());
                 for (OrdersEntity o: orders) {
                     if (o.getStatus().equals("Reserved")) {
                         o.setStatus("Arrived");
+                        o.setStatusArrived(currentDate.getTime());
                         _orderDao.update(o);
                     }
                 }
