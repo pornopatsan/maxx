@@ -41,7 +41,7 @@ public class AutoTest {
     }
 
     public void AddUpdateDeleteAutoTest() {
-        driver.get("http://localhost:8080/maxx_war_exploded/main");
+        driver.get("http://localhost:8080/h_war_exploded/main");
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
         Assert.assertEquals(driver.getTitle(), "Главная Страница");
@@ -77,7 +77,7 @@ public class AutoTest {
     }
 
     public void AddCustomerToAutoTest() {
-        driver.get("http://localhost:8080/maxx_war_exploded/main");
+        driver.get("http://localhost:8080/h_war_exploded/main");
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
         Assert.assertEquals(driver.getTitle(), "Главная Страница");
