@@ -13,6 +13,7 @@ import spring.model.AutoEntity;
 import spring.model.CustomerEntity;
 import spring.model.OrdersEntity;
 
+import javax.xml.bind.ValidationException;
 import java.util.Date;
 
 @Controller
@@ -40,9 +41,16 @@ public class MainController {
     public ModelAndView addCustomerForm(@RequestParam Integer id) {
         try {
             orderedAuto = _autoDao.getById(id);
+            if (orderedAuto.getIsSold().equals(true)) {
+                throw new ValidationException("This Car is Already Sold");
+            }
             ModelAndView modelAndView = new ModelAndView("add_customer_form");
             modelAndView.getModelMap().addAttribute("newCustomer", new CustomerEntity());
             return modelAndView;
+        } catch (ValidationException e) {
+            orderedAuto = null;
+            String msg = e.getMessage();
+            return new ModelAndView(String.format("redirect:auto_show?id=%d&error=%s", id, msg));
         } catch (Exception e) {
             orderedAuto = null;
             return new ModelAndView("redirect:main");
@@ -66,7 +74,7 @@ public class MainController {
 
             _customerDao.save(newCustomer);
             _orderDao.save(newOrder);
-            return new ModelAndView("redirect:orders_show");
+            return new ModelAndView(String.format("redirect:order_details_show?id=%d", newOrder.getId()));
         } catch (Exception e) {
             orderedAuto = null;
             throw e;
