@@ -70,6 +70,7 @@ public class OrdersController {
                 order.setStatus("Finished");
                 order.setStatusFinished(currentDate.getTime());
                 order.getAuto().setIsSold(true);
+                // FIXME: deny all other orders
                 _autoDao.update(order.getAuto());
             } else {
                 order.setStatus("Denied");

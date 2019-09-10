@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 @Test
 public class AutoTest {
 
-    private WebDriver driver = new SafariDriver();  // TODO: ASK: Надеюсь у утебя сафари
+    private WebDriver driver = new SafariDriver();
 
     private void waitTimeout(WebDriver driver, Integer timeout) {
         try {
