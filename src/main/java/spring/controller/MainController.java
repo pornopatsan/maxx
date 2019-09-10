@@ -77,8 +77,7 @@ public class MainController {
             return new ModelAndView(String.format("redirect:order_details_show?id=%d", newOrder.getId()));
         } catch (Exception e) {
             orderedAuto = null;
-            throw e;
-//            return new ModelAndView("redirect:main");
+            return new ModelAndView("redirect:main");
         }
     }
 }
